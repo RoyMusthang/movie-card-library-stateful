@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class InputSubTitle extends React.Component {
   render() {
@@ -14,8 +15,13 @@ class InputSubTitle extends React.Component {
           onChange={ onChange }
         />
       </label>
-    )
+    );
   }
 }
+
+InputSubTitle.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default InputSubTitle;

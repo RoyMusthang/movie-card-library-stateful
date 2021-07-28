@@ -9,14 +9,14 @@ import SelectGenre from './compForm/selectGenre';
 class AddMovie extends React.Component {
   constructor(props) {
     super(props);
-    this.state({
+    this.state = {
       subtitle: '',
       title: '',
       imagePath: '',
       storyline: '',
       rating: 0,
       genre: 'action',
-    });
+    };
   }
 
   handleChange = (e) => {
