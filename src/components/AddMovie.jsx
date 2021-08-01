@@ -27,7 +27,7 @@ class AddMovie extends React.Component {
 
   handleChange(event) {
     const { value, name } = event.target;
-    if (name === 'rating') {
+    if (name === 'rating') { // consegui arrumar o bug do input com a ajuda de rogerio p. da silva
       return this.setState({
         [name]: Number(value),
       });
@@ -55,7 +55,7 @@ class AddMovie extends React.Component {
 
   render() {
     const { onClick } = this.props;
-    const { title, subtitle, storyline, imagePath, rating, genre } = this;
+    const { title, subtitle, storyline, imagePath, rating, genre } = this.state;
     return (
       <form data-testid="add-movie-form" onSubmit={ this.handleSubmit }>
         <InputTitle value={ title } onChange={ this.handleChange } />
