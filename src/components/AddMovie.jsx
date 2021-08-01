@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TitleInput from './compForm/TitleInput';
-import SubtitleInput from './compForm/SubtitleInput';
-import ImageInput from './compForm/ImageInput';
-import StorylineInput from './compForm/StorylineInput';
-import RatingInput from './compForm/RatingInput';
-import GenreInput from './compForm/GenreInput';
+import Genre from './inputGenre';
+import inputTemplate from './inputTemplate';
 
 class AddMovie extends React.Component {
   constructor() {
     super();
-    this.updateState = this.updateState.bind(this);
-    this.clickButton = this.clickButton.bind(this);
     this.state = {
-      title: '',
       subtitle: '',
+      title: '',
       imagePath: '',
       storyline: '',
       rating: 0,
@@ -22,7 +16,15 @@ class AddMovie extends React.Component {
     };
   }
 
-  clickButton() {
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault();
     const { onClick } = this.props;
     onClick(this.state);
     this.setState({
@@ -33,31 +35,52 @@ class AddMovie extends React.Component {
       rating: 0,
       genre: 'action',
     });
-  }
-
-  updateState(event) {
-    const { name } = event.target;
-    this.setState({
-      [name]: event.target.value,
-    });
-  }
+  };
 
   render() {
-    const { title, subtitle, imagePath, storyline, rating, genre } = this.state;
-    const { updateState } = this;
+    const {
+      subtitle,
+      title,
+      imagePath,
+      storyline,
+      rating,
+      genre,
+    } = this.state;
     return (
       <form data-testid="add-movie-form">
-        <TitleInput title={ title } updateState={ updateState } />
-        <SubtitleInput subtitle={ subtitle } updateState={ updateState } />
-        <ImageInput imagePath={ imagePath } updateState={ updateState } />
-        <StorylineInput storyline={ storyline } updateState={ updateState } />
-        <RatingInput rating={ rating } updateState={ updateState } />
-        <GenreInput genre={ genre } updateState={ updateState } />
-        <button
-          type="button"
-          data-testid="send-button"
-          onClick={ this.clickButton }
-        >
+        <inputTemplate
+          text="Título"
+          name="title"
+          value={ title }
+          handleChange={ this.handleChange }
+        />
+        <inputTemplate
+          text="Subtítulo"
+          name="subtitle"
+          value={ subtitle }
+          handleChange={ this.handleChange }
+        />
+        <inputTemplate
+          text="Imagem"
+          name="imagePath"
+          value={ imagePath }
+          handleChange={ this.handleChange }
+        />
+        <inputTemplate
+          text="Sinopse"
+          name="storyline"
+          value={ storyline }
+          handleChange={ this.handleChange }
+        />
+        <inputTemplate
+          text="Avaliação"
+          name="rating"
+          value={ rating }
+          handleChange={ this.handleChange }
+          type="number"
+        />
+        <Genre genre={ genre } handleChange={ this.handleChange } />
+        <button type="submit" onClick={ this.onSubmit } data-testid="send-button">
           Adicionar filme
         </button>
       </form>
