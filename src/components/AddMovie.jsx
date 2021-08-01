@@ -25,9 +25,16 @@ class AddMovie extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name } = target;
-    this.setState({ [name]: target.value });
+  handleChange(event) {
+    const { value, name } = event.target;
+    if (name === 'rating') {
+      return this.setState({
+        [name]: Number(value),
+      });
+    }
+    this.setState({
+      [name]: value,
+    });
   }
 
   handleClick(callback) {
@@ -54,9 +61,9 @@ class AddMovie extends React.Component {
         <InputTitle value={ title } onChange={ this.handleChange } />
         <InputSubTitle value={ subtitle } onChange={ this.handleChange } />
         <InputImage value={ imagePath } onChange={ this.handleChange } />
-        <InputRating value={ Number(rating) } onChange={ this.handleChange } />
         <InputStoryline value={ storyline } onChange={ this.handleChange } />
-        <SelectGenre genero={ genre } onChange={ this.handleChange } />
+        <InputRating value={ rating } onChange={ this.handleChange } />
+        <SelectGenre value={ genre } onChange={ this.handleChange } />
         <button
           type="submit"
           data-testid="send-button"
