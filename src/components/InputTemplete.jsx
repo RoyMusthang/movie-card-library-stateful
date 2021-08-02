@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class inputTemplate extends React.Component {
+class InputTemplete extends React.Component {
   render() {
     const { text, name, value, handleChange, type = 'text' } = this.props;
     return (
@@ -23,7 +23,7 @@ class inputTemplate extends React.Component {
   }
 }
 
-inputTemplate.propTypes = {
+InputTemplete.propTypes = {
   text: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -31,4 +31,4 @@ inputTemplate.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default inputTemplate;
+export default InputTemplete;
